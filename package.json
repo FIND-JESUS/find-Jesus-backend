@@ -1,0 +1,37 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsoa spec-and-routes && tsc",
+    "dev": "tsoa spec-and-routes && nodemon src/index.ts",
+    "start": "node dist/index.js",
+    "generate": "tsoa spec-and-routes"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.6.0",
+    "@prisma/client": "^7.6.0",
+    "express": "^5.2.1",
+    "ioredis": "^5.10.1",
+    "jsonwebtoken": "^9.0.3",
+    "socket-io": "^1.0.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "tsoa": "^7.0.0-alpha.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/ioredis": "^4.28.10",
+    "@types/node": "^25.5.0",
+    "@types/swagger-ui-express": "^4.1.8",
+    "nodemon": "^3.1.14",
+    "prisma": "^7.6.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.2"
+  }
+}
