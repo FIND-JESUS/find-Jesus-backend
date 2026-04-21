@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx prisma generate && npx tsoa spec-and-routes && tsc",
     "dev": "npx prisma generate && npx tsoa spec-and-routes && nodemon --exec ts-node src/index.ts",
-    "start": "node dist/index.js",
+    "start": "node /dist/src/index.js",
     "generate": "npx prisma generate && npx tsoa spec-and-routes",
     "render-build": "npm install && npm run build"
   },

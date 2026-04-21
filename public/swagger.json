@@ -6,7 +6,37 @@
 		"parameters": {},
 		"requestBodies": {},
 		"responses": {},
-		"schemas": {},
+		"schemas": {
+			"birthdayDTO": {
+				"properties": {
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"dateOfBirth": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"consent": {
+						"type": "boolean"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"firstName",
+					"lastName",
+					"dateOfBirth",
+					"consent",
+					"email"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
 		"securitySchemes": {
 			"bearerAuth": {
 				"type": "http",
@@ -52,6 +82,85 @@
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/birthday/submit-birthday": {
+			"post": {
+				"operationId": "SubmitBirthday",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Birthday APIs"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/birthdayDTO"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/birthday/get-birthday": {
+			"get": {
+				"operationId": "GetBirthday",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Birthday APIs"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/birthday/post-message-to-birthday": {
+			"post": {
+				"operationId": "PostMessage",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Birthday APIs"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "authorization",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		}
 	},
