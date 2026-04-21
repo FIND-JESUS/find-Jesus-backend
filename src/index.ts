@@ -6,10 +6,11 @@ import { RegisterRoutes } from "./routes/routes";
 import * as swaggerJson from "../public/swagger.json";
 import "./config/redis";
 import { initSocket } from "./config/socket";
-
+import * as dotenv from 'dotenv';
+import { startBirthdayCron } from "./jobs/birthday.job";
 const app: Application = express();
 const server = createServer(app); // wrap express with http server
-
+dotenv.config();
 // Middlewares
 app.use(express.json());
 app.use(cors({
@@ -26,7 +27,7 @@ RegisterRoutes(app);
 
 // Initialize Socket.io
 initSocket(server);
-
+startBirthdayCron();
 const PORT = process.env.PORT || 5000;
 
 // Use server.listen instead of app.listen
