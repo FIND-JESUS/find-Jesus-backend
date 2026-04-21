@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Header, Post, Route, Tags } from "tsoa";
 import { birthdayDTO } from "../DTO/birthdayDTO";
-import { prisma } from "../../db";
+import { prisma } from "../db";
 import { sendAdminNotification } from "../services/email"; // make sure this exists
 
 @Tags("Birthday APIs")

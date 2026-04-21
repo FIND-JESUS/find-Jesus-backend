@@ -23,7 +23,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BirthdayController = void 0;
 const tsoa_1 = require("tsoa");
-const db_1 = require("../../db");
+const db_1 = require("../db");
 const email_1 = require("../services/email"); // make sure this exists
 let BirthdayController = class BirthdayController extends tsoa_1.Controller {
     // 🎯 Submit Birthday

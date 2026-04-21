@@ -17,7 +17,7 @@ model User {
   firstName   String
   lastName    String
   dateOfBirth DateTime
-  consent     Boolean?  @default(false)
+  consent     Boolean? @default(false)
   email       String   @unique
   password    String?
   createdAt   DateTime @default(now())

@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.startBirthdayCron = void 0;
 const node_cron_1 = __importDefault(require("node-cron"));
-const db_1 = require("../../db"); // adjust path
+const db_1 = require("../db"); // adjust path
 const email_1 = require("../services/email");
 const startBirthdayCron = () => {
     node_cron_1.default.schedule("0 9 * * *", () => __awaiter(void 0, void 0, void 0, function* () {
@@ -25,7 +25,7 @@ const startBirthdayCron = () => {
         const users = yield db_1.prisma.user.findMany({
             where: { consent: true }
         });
-        const upcoming = users.filter(user => {
+        const upcoming = users.filter((user) => {
             const dob = new Date(user.dateOfBirth);
             return (dob.getDate() === tomorrow.getDate() &&
                 dob.getMonth() === tomorrow.getMonth());

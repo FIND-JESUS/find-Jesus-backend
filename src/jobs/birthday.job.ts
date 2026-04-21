@@ -1,5 +1,5 @@
 import cron from "node-cron";
-import { prisma } from "../../db"; // adjust path
+import { prisma } from "../db"; // adjust path
 import { sendAdminNotification } from "../services/email";
 
 export const startBirthdayCron = () => {
@@ -15,7 +15,7 @@ export const startBirthdayCron = () => {
       where: { consent: true }
     });
 
-    const upcoming = users.filter(user => {
+    const upcoming = users.filter((user) => {
       const dob = new Date(user.dateOfBirth);
 
       return (
