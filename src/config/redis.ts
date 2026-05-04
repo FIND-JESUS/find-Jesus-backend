@@ -1,27 +1,17 @@
-import Redis from "ioredis";
+import { createClient } from 'redis';
 
-const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379", {
-  tls: process.env.NODE_ENV === "production" ? {} : undefined, // SSL for Upstash in production
-  maxRetriesPerRequest: 3,
-  retryStrategy(times) {
-    if (times > 3) {
-      console.error("Redis max retries reached");
-      return null;
+export const redis =  createClient({
+    username: 'default',
+    password: process.env.REDIS_PASSWORD,
+    socket: {
+        host: process.env.REDIS_HOST,
+        port: 18037
     }
-    return Math.min(times * 200, 1000); // wait 200ms, 400ms, 600ms between retries
-  },
 });
 
-redis.on("connect", () => {
-  console.log("✅ Redis connected successfully");
-});
+redis.on('error', err => console.log('Redis Client Error', err));
 
-redis.on("error", (err) => {
-  console.error("❌ Redis connection error:", err);
-});
+redis.connect();
 
-redis.on("close", () => {
-  console.log("Redis connection closed");
-});
 
-export default redis;
+
