@@ -6,11 +6,14 @@ import { RegisterRoutes } from "./routes/routes";
 import * as swaggerJson from "../public/swagger.json";
 import "./config/redis";
 import { initSocket } from "./config/socket";
-import * as dotenv from 'dotenv';
+import * as dotenv from "dotenv";
 import { startBirthdayCron } from "./jobs/birthday.job";
-const app: Application = express();
-const server = createServer(app); // wrap express with http server
+
 dotenv.config();
+
+const app: Application = express();
+const server = createServer(app);
+
 // Middlewares
 app.use(express.json());
 app.use(cors({
@@ -22,16 +25,25 @@ app.use(cors({
 // Swagger UI
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJson));
 
-// Register TSOA auto generated routes
-RegisterRoutes(app);
+/**
+ * 🔥 IMPORTANT PART
+ */
+const apiRouter = express.Router();
 
-// Initialize Socket.io
+// Register all routes into this router
+RegisterRoutes(apiRouter);
+
+// Mount router at /api
+app.use("/api", apiRouter);
+
+// Socket + Jobs
 initSocket(server);
 startBirthdayCron();
+
 const PORT = process.env.PORT || 5000;
 
-// Use server.listen instead of app.listen
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log(`API base: http://localhost:${PORT}/api`);
   console.log(`Swagger docs at http://localhost:${PORT}/api-docs`);
 });
